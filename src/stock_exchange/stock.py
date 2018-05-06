@@ -16,7 +16,6 @@ class Stock:
 
     def buy(self, shares):
         if self.total_shares - self.sold_shares < shares:
-            print("Error: cannot buy more shares than exist")
+            raise Exception("Error: cannot buy more shares than exist")
         else:
             self.sold_shares += shares
-        
