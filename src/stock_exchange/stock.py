@@ -7,3 +7,6 @@ class Stock():
 
     def get_symbol(self):
         return self.symbol
+
+    def get_value(self):
+        return self.value
