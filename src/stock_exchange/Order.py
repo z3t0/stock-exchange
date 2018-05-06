@@ -13,5 +13,12 @@ class Order:
         # the order may be rejected if for example the share
         # has been sold out by a previous order
         self.succeeded = False
-        
-        
+
+    
+    def value(self):
+        """Returns the value of this order in dollars.
+
+        This is computed by multiplying the number of shares by the
+        value of each share for the stock.
+        """
+        return self.shares * self.stock.value

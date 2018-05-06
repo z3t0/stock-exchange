@@ -16,5 +16,11 @@ class TestOrderMethods(unittest.TestCase):
         self.assertEqual(order.processed, False)
         self.assertEqual(order.succeeded, False)
 
+    def test_value(self):
+        stock.value = 10
+        expected_value = stock.value * order.shares
+
+        self.assertEqual(order.value(), expected_value)
+
 if __name__ == '__main__':
     unittest.main()
