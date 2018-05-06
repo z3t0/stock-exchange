@@ -9,9 +9,5 @@ class TestStockMethods(unittest.TestCase):
         self.assertEqual(stock.symbol, 'ABC')
         self.assertEqual(stock.value, 1)
 
-    def test_set_value(self):
-        stock.set_value(2)
-        self.assertEqual(stock.value, 2)
-
 if __name__ == '__main__':
     unittest.main()
