@@ -22,5 +22,8 @@ class TestOrderMethods(unittest.TestCase):
 
         self.assertEqual(order.value(), expected_value)
 
+    # def test_process(self):
+        # order.process()
+
 if __name__ == '__main__':
     unittest.main()
