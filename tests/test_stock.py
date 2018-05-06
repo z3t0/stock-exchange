@@ -11,21 +11,17 @@ class TestStockMethods(unittest.TestCase):
         self.assertEqual(self.stock.value, 1)
         self.assertEqual(self.stock.order_history, [])
         self.assertEqual(self.stock.total_shares, 100)
-
-        print(self.stock.sold_shares)
-        # should be 0, but is 100
         self.assertEqual(self.stock.sold_shares, 0)
 
     def test_buy(self):
         self.stock.buy(100)
 
-        # sets it to 100
         self.assertEqual(self.stock.sold_shares, 100)
 
-    # def test_sell(self):
-    #     stock.sell(100)
+     def test_sell(self):
+        stock.sell(100)
 
-    #     self.assertEqual(stock.sold_shares, 0)
+        self.assertEqual(stock.sold_shares, 0)
 
 
 
