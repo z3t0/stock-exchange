@@ -5,7 +5,7 @@ matrix:
   include:
     - python: 3.6
       env:
-        - TOXENV=py36,clean,coverage,report
+        - TOXENV=py36,clean,coverage,report,codecov
 before_install:
   - python --version
   - uname -a
@@ -14,7 +14,6 @@ install:
   - pip install tox
   - virtualenv --version
   - easy_install --version
-  - pip install codecov
   - pip --version
   - tox --version
 script:
@@ -22,8 +21,6 @@ script:
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
-after_success:
-  - codecov
 notifications:
   email:
     on_failure: always
