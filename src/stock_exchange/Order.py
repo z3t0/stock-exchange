@@ -1,3 +1,5 @@
+from enum import Enum
+
 class Order:
     """Contains information about each order that will be or has already been processed.
     """
@@ -7,12 +9,7 @@ class Order:
         self.order_type = order_type
         self.shares = shares
 
-        # True if the exchange is aware of this order
-        self.processed = False
-        # True if the exchange has accepted the order
-        # the order may be rejected if for example the share
-        # has been sold out by a previous order
-        self.succeeded = False
+        self.status = OrderStatus.NOT_PROCESSED
 
     
     def value(self):
@@ -22,3 +19,18 @@ class Order:
         value of each share for the stock.
         """
         return self.shares * self.stock.value
+
+    def process(self):
+        if self.order_type == "buy":
+            try:
+                self.stock.buy(self)
+                self.profile.buy(self)
+            except:
+                self.status = OrderStatus.FAILED
+            else:
+                self.status = OrderStatus.SUCCEEDED
+
+class OrderStatus(Enum):
+    NOT_PROCESSED = 1
+    SUCCEEDED = 2
+    FAILED = 3
