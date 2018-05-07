@@ -4,6 +4,8 @@ cache: pip
 matrix:
   include:
     - python: 3.6
+      env:
+        - TOXENV=py36, clean, coverage, report, coveralls
 before_install:
   - python --version
   - uname -a
