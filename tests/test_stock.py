@@ -43,3 +43,7 @@ class TestStockMethods(unittest.TestCase):
     def test_sell_fail(self):
         self.order.shares = 100
         self.assertRaises(Exception, self.stock.sell, self.order)
+
+    def test_buy_fail(self):
+        self.order.shares = 200
+        self.assertRaises(Exception, self.stock.buy, self.order)
