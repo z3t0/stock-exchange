@@ -33,7 +33,7 @@ class TestStockMethods(unittest.TestCase):
         self.order.shares = 100
 
         # So that shares can be sold
-        self.stock.sold_shares = 100 
+        self.stock.sold_shares = 100
 
         self.stock.sell(self.order)
 
@@ -43,6 +43,3 @@ class TestStockMethods(unittest.TestCase):
     def test_sell_fail(self):
         self.order.shares = 100
         self.assertRaises(Exception, self.stock.sell, self.order)
-
-if __name__ == '__main__':
-    unittest.main()

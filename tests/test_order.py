@@ -32,6 +32,3 @@ class TestOrderMethods(unittest.TestCase):
         self.profile.buy.assert_called_with(self.order)
 
         self.assertEqual(self.order.status, OrderStatus.SUCCEEDED)
-
-if __name__ == '__main__':
-    unittest.main()
