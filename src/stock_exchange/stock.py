@@ -8,16 +8,27 @@ class Stock:
         self.total_shares = total_shares
         self.sold_shares = 0
 
-    def sell(self, order):
-        if self.sold_shares - order.shares < 0:
-            raise Exception("Cannot sell more shares than currently sold")
-        else:
-            self.sold_shares -= order.shares
-            self.order_history.append(order)
+    def _sell(self, shares):
+            self.sold_shares -= shares
 
-    def buy(self, order):
-        if self.total_shares - self.sold_shares < order.shares:
-            raise Exception("Error: cannot buy more shares than exist")
-        else:
-            self.sold_shares += order.shares
+    def _buy(self, shares):
+            self.sold_shares += shares
+
+    def process(self, order):
+        can_process = self.can_process()
+
+        if can_process:
+            if order.order_type == "sell":
+                self.sell(order.shares)
+            elif order.order_type == "buy":
+                self.buy(order.shares)
             self.order_history.append(order)
+        else:
+            raise Exception("Order cannot be processed")
+                
+    def can_process(self, order):
+        if order.order_type == "sell":
+            return not (self.sold_shares - order.shares < 0)
+        elif order.order_type == "buy":
+            return not (self.total_shares - self.sold_shares < order.shares)
+    

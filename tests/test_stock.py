@@ -15,35 +15,16 @@ class TestStockMethods(unittest.TestCase):
         self.assertEqual(self.stock.total_shares, 100)
         self.assertEqual(self.stock.sold_shares, 0)
 
-    def test_buy(self):
-        self.order.shares = 100
+    def test__sell(self):
+        sell = 100
+        self.stock.sold_shares = sell
 
-
-        self.stock.buy(self.order)
-
-        self.assertEqual(self.stock.sold_shares, 100)
-        self.assertEqual(self.stock.order_history[-1], self.order)
-
-    def test_buy_fail(self):
-        self.order.shares = 100
-        self.assertRaises(Exception, self.stock.buy, 200)
-        self.assertEqual(len(self.stock.order_history), 0)
-
-    def test_sell(self):
-        self.order.shares = 100
-
-        # So that shares can be sold
-        self.stock.sold_shares = 100
-
-        self.stock.sell(self.order)
-
+        self.stock._sell(sell)
         self.assertEqual(self.stock.sold_shares, 0)
-        self.assertEqual(self.stock.order_history[-1], self.order)
 
-    def test_sell_fail(self):
-        self.order.shares = 100
-        self.assertRaises(Exception, self.stock.sell, self.order)
+    def test__buy(self):
+        buy = 100
+        
+        self.stock._buy(buy)
+        self.assertEqual(self.stock.sold_shares, buy)
 
-    def test_buy_fail(self):
-        self.order.shares = 200
-        self.assertRaises(Exception, self.stock.buy, self.order)

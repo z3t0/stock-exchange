@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Order:
     """Contains information about each order that will be or has already been processed.
     """
@@ -11,7 +12,6 @@ class Order:
 
         self.status = OrderStatus.NOT_PROCESSED
 
-    
     def value(self):
         """Returns the value of this order in dollars.
 
@@ -22,13 +22,17 @@ class Order:
 
     def process(self):
         if self.order_type == "buy":
-            try:
-                self.stock.buy(self)
-                self.profile.buy(self)
-            except:
-                self.status = OrderStatus.FAILED
-            else:
+            profile_can_process = self.profile_can_process()
+            stock_can_process = self.stock_can_process()
+
+            if stock_can_process and profile_can_process:
+                self.stock.process(self)
+                self.profile.process(self)
+
                 self.status = OrderStatus.SUCCEEDED
+            else:
+                self.status = OrderStatus.FAILED
+
 
 class OrderStatus(Enum):
     NOT_PROCESSED = 1
