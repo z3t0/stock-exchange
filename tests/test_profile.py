@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from stock_exchange.profile import create_profile, buy, sell
+from stock_exchange.profile import create_profile, buy, sell, can_buy, can_sell
 from uuid import UUID
 
 
@@ -68,3 +68,16 @@ class TestProfileFunction(unittest.TestCase):
                           shares=20, cost=10)
 
         self.assertEqual(self.profile['cash'], 100)
+
+    def test_can_buy(self):
+        self.assertEqual(can_buy(self.profile, 10), True)
+        self.assertEqual(can_buy(self.profile, 100), False)
+
+    def test_can_sell(self):
+        self.profile['assets']['ABC'] = {'shares': 10}
+
+        self.assertEqual(can_sell(self.profile, symbol='ABC',
+                                 shares=10), True)
+
+        self.assertEqual(can_sell(self.profile, symbol='ABC',
+                                 shares=10), False)

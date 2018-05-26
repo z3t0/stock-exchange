@@ -39,3 +39,11 @@ def sell(profile, symbol, cost, shares):
     else:
         raise Exception("Share is not owned")
 
+
+def can_buy(profile, cost):
+    return (profile['cash'] - cost > 0)
+
+def can_sell(profile, symbol, shares):
+    assets = profile['assets']
+
+    if not symbol in assets:
